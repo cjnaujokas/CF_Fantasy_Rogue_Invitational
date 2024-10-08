@@ -2,9 +2,8 @@
 
 const men = [];
 const women = [];
-// Example: JavaScript to populate leaderboard
+//JavaScript to populate leaderboard
 document.addEventListener("DOMContentLoaded", function () {
-    // Simulating fetched data from an API
 
     const url = "https://compete-strongest-com.global.ssl.fastly.net/api/p/divisions/BFRAAW/leaderboard/?p=1&d=asc";
     const url2 = "https://compete-strongest-com.global.ssl.fastly.net/api/p/divisions/WGPVFH/leaderboard/?p=1&d=asc";
@@ -28,14 +27,15 @@ function populateLeaderboardTable(url, ldrdata, leaderboardId) {
             return response.json(); // Convert the response data to JSON
         })
         .then(raw_leaderboard => {
-            // Assuming body_rows is an array of arrays
+            
             const bodyRows = raw_leaderboard.data.body_rows;
+            // Debug
             // console.log(bodyRows);
 
             for (let i = 0; i < bodyRows.length; i++) {
                 const competitor = bodyRows[i][0];
                 const add_data = {
-                    rank: competitor.ordinalRank, // Assuming there's an ordinalRank or similar property
+                    rank: competitor.ordinalRank,
                     name: competitor.competitor_name,
                     score: competitor.cum_workout_rank
                 };
@@ -54,7 +54,6 @@ function populateLeaderboardTable(url, ldrdata, leaderboardId) {
         // Get the table body element
         const leaderboardBody = document.getElementById(leaderboardId).getElementsByTagName('tbody')[0];
         leaderboardBody.innerHTML = ""; // Clear any existing rows
-
 
         // Populate the leaderboard table
         data.forEach((competitor) => {
